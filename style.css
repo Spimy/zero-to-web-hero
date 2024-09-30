@@ -108,7 +108,7 @@ body {
   place-items: center; */
 }
 
-.todo__card {
+.card {
   background: var(--background-colour);
   display: grid;
   grid-template-columns: 1fr 3fr;
@@ -120,7 +120,7 @@ body {
 }
 
 /* notes */
-.notes {
+.card__notes {
   background-color: var(--background-colour--2);
   padding: 1rem;
   display: flex;
@@ -129,25 +129,25 @@ body {
   overflow: hidden;
 }
 
-.notes h1 {
+.card__notes h1 {
   color: var(--secondary-colour);
   font-weight: 500;
   font-size: 1.5rem;
 }
 
-.notes svg {
+.card__notes svg {
   /* for text size scaling */
   width: 1.5rem;
   height: 1.5rem;
 }
 
-.notes__items {
+.card__notes__items {
   flex: 1;
   overflow: auto;
   margin-bottom: 1rem;
 }
 
-.notes__items li {
+.card__notes__items li {
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   margin-top: 0.5rem;
@@ -158,27 +158,27 @@ body {
   opacity: 70%;
 }
 
-.notes__items li > span {
+.card__notes__items li > span {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.notes__items__delete {
+.card__notes__items__delete {
   height: 2rem;
   width: 2rem;
 }
 
-.notes__items__delete:hover {
-  color: hsl(from var(--text-colour) h s l / 1);
+.card__notes__items__delete:hover {
+  color: var(--text-colour);
 }
 
-.notes__items li:first-of-type {
+.card__notes__items li:first-of-type {
   background-color: hsl(from var(--primary-colour) h s l / 0.32);
   opacity: 1;
 }
 
-.notes__add {
+.card__notes__add {
   color: var(--text-colour--2);
   background-color: var(--secondary-colour);
   margin-bottom: 0.5rem;
@@ -186,7 +186,7 @@ body {
   padding: 0.5rem 1rem;
 }
 
-.notes__user {
+.card__notes__user {
   border-radius: 0.5rem;
   display: flex;
   align-items: center;
@@ -195,31 +195,31 @@ body {
   overflow: hidden;
 }
 
-.notes__user p,
-.notes__user button {
+.card__notes__user p,
+.card__notes__user button {
   padding: 0.5rem;
 }
 
-.notes__user p {
+.card__notes__user p {
   flex: 1;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.notes__user button {
+.card__notes__user button {
   background-color: hsl(from var(--primary-colour) h s l / 0.32);
 }
 
 /* todo-items */
-.todos {
+.card__todos {
   position: relative;
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
-.todos h1 {
+.card__todos h1 {
   background-color: var(--secondary-colour);
   background: linear-gradient(
     90deg,
@@ -234,13 +234,13 @@ body {
   font-weight: 600;
 }
 
-.todos__items {
+.card__todos__items {
   overflow: auto;
   padding: 1rem;
   padding-bottom: 4rem;
 }
 
-.todos__items li {
+.card__todos__items li {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -250,16 +250,16 @@ body {
   border-radius: 0.5rem;
 }
 
-.todos__items__delete {
+.card__todos__items__delete {
   height: 2rem;
   width: 2rem;
 }
 
-.todos__items__delete:hover {
+.card__todos__items__delete:hover {
   color: hsl(from var(--text-colour) h s l / 1);
 }
 
-.todos__items__add {
+.card__todos__items__add {
   position: absolute;
   bottom: 1rem;
   right: 1rem;
@@ -291,12 +291,12 @@ body {
 }
 
 @media screen and (max-width: 640px) {
-  .todo__card {
+  .card {
     grid-template-columns: 0fr 3fr;
     position: relative;
   }
 
-  .notes {
+  .card__notes {
     z-index: 1;
     display: none;
     position: absolute;
