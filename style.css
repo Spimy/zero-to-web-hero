@@ -263,7 +263,7 @@ body {
     padding: 1rem;
   }
 
-  .card__burger:has(input:checked) + .notes {
+  .card__burger:has(input:checked) + .card__notes {
     width: unset;
     left: 2.5rem;
     right: 0;
