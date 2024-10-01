@@ -106,6 +106,9 @@ body {
   /* Centering a div 2 : grid */
   /* display: grid;
   place-items: center; */
+
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .card {
