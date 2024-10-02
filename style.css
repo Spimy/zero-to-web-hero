@@ -103,6 +103,8 @@ body {
   align-items: center;
   justify-content: center;
 
+	/* SPIMY: leave as grid during talk to save time from going back to flex */
+
   /* Centering a div 2 : grid */
   /* display: grid;
   place-items: center; */
@@ -115,11 +117,16 @@ body {
   background: var(--background-colour);
   display: grid;
   grid-template-columns: 1fr 3fr;
-  grid-template-rows: 1fr;
+  
+  /* SPIMY: not necessary */
+  /* grid-template-rows: 1fr; */
+  
   border-radius: 1rem;
   overflow: hidden;
   height: 40rem;
-  width: 60rem;
+
+  /* SPIMY: not necessary */
+  /* width: 60rem; */
 }
 
 /* notes */
@@ -162,7 +169,10 @@ body {
   border-radius: 0.5rem;
   display: flex;
   align-items: center;
-  padding-left: 1rem;
+
+  /* SPIMY: looks fine without the padding imo */
+  /* padding-left: 1rem; */
+
   background-color: var(--background-colour);
   overflow: hidden;
 }
@@ -180,6 +190,7 @@ body {
 }
 
 .card__notes__user button {
+	/* SPIMY: relative hsl is possible, hence why we use it and why it's underrated */
   background-color: hsl(from var(--primary-colour) h s l / 0.32);
 }
 
