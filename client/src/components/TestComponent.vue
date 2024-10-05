@@ -1,7 +1,7 @@
 <script setup lang="ts">
 //TODO : Import onMounted
 
-const props = //TODO;
+//const props = TODO;
 //TODO : on mounted
 </script>
 
