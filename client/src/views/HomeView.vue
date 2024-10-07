@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, type Ref } from 'vue';
-//TODO : Import Test Component
+import TestComponent from '@/components/TestComponent.vue';
 
 //const username: TODO;
 

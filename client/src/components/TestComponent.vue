@@ -7,6 +7,7 @@
 
 <template>
   <!-- TODO -->
+  test
 </template>
 
 <style scoped></style>
