@@ -8,17 +8,7 @@ const password = ref<string>('');
 const router = useRouter();
 
 const handleLogin = async () => {
-  if (!email.value || !password.value) {
-    alert('Please enter both email and password.');
-    return;
-  }
-
-  const success = true;
-  if (success) {
-    router.push('/');
-  } else {
-    alert('Login failed. Please check your credentials.');
-  }
+  // TODO
 };
 </script>
 
@@ -28,19 +18,16 @@ const handleLogin = async () => {
       <h2>Login</h2>
       <form class="loginCard__credentials" @submit.prevent="handleLogin">
         <div class="loginCard__field">
-          <label for="email">Email</label>
-          <input type="text" v-model="email" id="email" placeholder="Email" />
+          <!-- TODO -->
         </div>
         <div class="loginCard__field">
-          <label for="password">Password</label>
-          <input type="password" v-model="password" id="password" placeholder="Password" />
+          <!-- TODO -->
           <p class="loginCard__forgot">Forgot Password</p>
         </div>
         <button class="loginCard__submit" type="submit">Login</button>
       </form>
       <p class="loginCard__register">
-        Don’t have an account?
-        <RouterLink to="/register"> Register Here</RouterLink>
+        <!-- TODO -->
       </p>
     </section>
   </main>

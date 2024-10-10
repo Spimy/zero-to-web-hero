@@ -69,14 +69,7 @@ const handleLogout = async () => {
       <aside class="card__notes">
         <h1>Notes</h1>
         <menu class="card__notes__items">
-          <todoNote
-            v-for="(note, index) in notes"
-            :key="index"
-            :isActive="activeIndex === index"
-            @click="toggleActive(index)"
-          >
-            {{ note.title }}
-          </todoNote>
+          <!-- TODO -->
         </menu>
 
         <button class="card__notes__add" @click="showNoteInput = true" v-if="!showNoteInput">
@@ -133,8 +126,9 @@ const handleLogout = async () => {
 
       <main class="card__todos">
         <h1>Room Renovation</h1>
-        <menu class="card__todos__items"><TodoItem>Test</TodoItem></menu>
-
+        <menu class="card__todos__items">
+          <!-- TODO -->
+        </menu>
         <button class="card__todos__items__add" @click="showTodoInput = true" v-if="!showTodoInput">
           <svg
             xmlns="http://www.w3.org/2000/svg"

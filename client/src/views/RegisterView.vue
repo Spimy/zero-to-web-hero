@@ -9,24 +9,7 @@ const confirmPassword = ref<string>('');
 const router = useRouter();
 
 const handleRegister = async () => {
-  if (password.value !== confirmPassword.value) {
-    alert('Passwords do not match!');
-    return;
-  }
-
-  if (!email.value || !password.value || !confirmPassword.value) {
-    alert('Please fill out all fields.');
-    return;
-  }
-
-  const success = true;
-
-  if (success) {
-    alert('Registration successful!');
-    router.push('/login');
-  } else {
-    alert('Registration failed. Please try again.');
-  }
+  // TODO
 };
 </script>
 
@@ -40,17 +23,10 @@ const handleRegister = async () => {
           <input type="text" v-model="email" id="email" placeholder="Email" />
         </div>
         <div class="registerCard__field">
-          <label for="password">Password</label>
-          <input type="password" v-model="password" id="password" placeholder="Password" />
+          <!-- TODO -->
         </div>
         <div class="registerCard__field">
-          <label for="password">Confirm Password</label>
-          <input
-            type="password"
-            v-model="confirmPassword"
-            id="confirmpassword"
-            placeholder="Confirm Password"
-          />
+          <!-- TODO -->
         </div>
         <button class="registerCard__submit" type="submit">Register</button>
       </form>

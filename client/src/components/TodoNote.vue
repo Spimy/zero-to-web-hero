@@ -1,20 +1,14 @@
 <script setup lang="ts">
-defineProps({
-  isActive: Boolean,
-  todoNum: {
-    type: Number,
-    default: 0
-  }
-});
+// TODO;
 </script>
 
 <template>
-  <div class="todoNote" :class="{ 'todoNote--active': isActive }">
+  <div class="todoNote">
     <div class="todoNote__left">
       <p class="todoNote__text"><slot></slot></p>
     </div>
     <div class="todoNote__right">
-      <p class="todoNote__num">{{ todoNum }}</p>
+      <p class="todoNote__num"></p>
       <button class="todoNote__delete">
         <svg
           xmlns="http://www.w3.org/2000/svg"
