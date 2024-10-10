@@ -6,10 +6,10 @@ import TodoNote from '@/components/TodoNote.vue';
 
 const router = useRouter();
 
-const notes = ref([
-  { title: '✏️ Homework', num: 5 },
-  { title: '✏️ Homework', num: 5 }
-]);
+// const notes = TODO
+
+// const todos = TODO
+
 const activeIndex = ref<number | null>(null);
 const showNoteInput = ref(false);
 const newNoteTitle = ref('');
@@ -17,7 +17,11 @@ const showTodoInput = ref(false);
 const newTodoTitle = ref('');
 
 const toggleActive = async (index: number) => {
-  activeIndex.value = index;
+  //TODO
+};
+
+const toggleCompleted = (index: number) => {
+  //TODO
 };
 
 const handleCreateNote = async (event: KeyboardEvent) => {

@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+//TODO
+</script>
 
 <template>
   <div class="todoItem">
@@ -35,6 +37,10 @@
 
 .todoItem__text {
   flex: 1;
+}
+
+.todoItem__text--active {
+  text-decoration: line-through;
 }
 
 .todoItem__delete {
