@@ -1,8 +1,14 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const props = defineProps<{
+  isCompleted: boolean;
+}>();
+</script>
 
 <template>
   <div class="todoItem">
-    <div class="todoItem__text"><slot></slot></div>
+    <div class="todoItem__text" :class="{ 'todoItem__text--active': props.isCompleted }">
+      <slot></slot>
+    </div>
     <button class="todoItem__delete">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -31,10 +37,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0.5rem 0;
 }
 
 .todoItem__text {
   flex: 1;
+}
+
+.todoItem__text--active {
+  text-decoration: line-through;
 }
 
 .todoItem__delete {

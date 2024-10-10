@@ -7,17 +7,27 @@ import TodoNote from '@/components/TodoNote.vue';
 const router = useRouter();
 
 const notes = ref([
-  { title: '✏️ Homework', num: 5 },
-  { title: '✏️ Homework', num: 5 }
+  { title: '✏️ Room Renovaton', num: 5 },
+  { title: '✏️ Room Renovaton', num: 5 }
 ]);
-const activeIndex = ref<number | null>(null);
+
+const todos = ref([
+  { content: 'Buy Galvanized Square Steel', isCompleted: true },
+  { content: 'Get Eco-friendly Wood Veneer', isCompleted: false }
+]);
+
+const activeNote = ref<number | null>(null);
 const showNoteInput = ref(false);
 const newNoteTitle = ref('');
 const showTodoInput = ref(false);
 const newTodoTitle = ref('');
 
 const toggleActive = async (index: number) => {
-  activeIndex.value = index;
+  activeNote.value = index;
+};
+
+const toggleCompleted = (index: number) => {
+  todos.value[index].isCompleted = !todos.value[index].isCompleted;
 };
 
 const handleCreateNote = async (event: KeyboardEvent) => {
@@ -69,14 +79,15 @@ const handleLogout = async () => {
       <aside class="card__notes">
         <h1>Notes</h1>
         <menu class="card__notes__items">
-          <todoNote
+          <TodoNote
             v-for="(note, index) in notes"
             :key="index"
-            :isActive="activeIndex === index"
+            :isActive="activeNote === index"
+            :todoNum="note.num"
             @click="toggleActive(index)"
           >
             {{ note.title }}
-          </todoNote>
+          </TodoNote>
         </menu>
 
         <button class="card__notes__add" @click="showNoteInput = true" v-if="!showNoteInput">
@@ -133,7 +144,16 @@ const handleLogout = async () => {
 
       <main class="card__todos">
         <h1>Room Renovation</h1>
-        <menu class="card__todos__items"><TodoItem>Test</TodoItem></menu>
+        <menu class="card__todos__items">
+          <TodoItem
+            v-for="(todo, index) in todos"
+            :key="index"
+            @click="toggleCompleted(index)"
+            :isCompleted="todo.isCompleted"
+          >
+            {{ todo.content }}
+          </TodoItem>
+        </menu>
 
         <button class="card__todos__items__add" @click="showTodoInput = true" v-if="!showTodoInput">
           <svg
