@@ -9,13 +9,13 @@ const confirmPassword = ref<string>('');
 const router = useRouter();
 
 const handleRegister = async () => {
-  if (password.value !== confirmPassword.value) {
-    alert('Passwords do not match!');
+  if (!email.value || !password.value || !confirmPassword.value) {
+    alert('Please fill out all fields.');
     return;
   }
 
-  if (!email.value || !password.value || !confirmPassword.value) {
-    alert('Please fill out all fields.');
+  if (password.value !== confirmPassword.value) {
+    alert('Passwords do not match!');
     return;
   }
 

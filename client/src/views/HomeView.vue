@@ -12,8 +12,8 @@ const notes = ref([
 ]);
 
 const todos = ref([
-  { content: 'Buy Galvanized Square Steel', isCompleted: true },
-  { content: 'Get Eco-friendly Wood Veneer', isCompleted: false }
+  { content: 'Buy Galvanized Square Steel', complete: true },
+  { content: 'Get Eco-friendly Wood Veneer', complete: false }
 ]);
 
 const activeNote = ref<number | null>(null);
@@ -27,7 +27,7 @@ const toggleActive = async (index: number) => {
 };
 
 const toggleCompleted = (index: number) => {
-  todos.value[index].isCompleted = !todos.value[index].isCompleted;
+  todos.value[index].complete = !todos.value[index].complete;
 };
 
 const handleCreateNote = async (event: KeyboardEvent) => {
@@ -149,7 +149,7 @@ const handleLogout = async () => {
             v-for="(todo, index) in todos"
             :key="index"
             @click="toggleCompleted(index)"
-            :isCompleted="todo.isCompleted"
+            :complete="todo.complete"
           >
             {{ todo.content }}
           </TodoItem>
@@ -195,13 +195,13 @@ body {
   min-height: 100dvh;
 
   /* Centering a div 1 : flex */
-  display: flex;
+  /* display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
 
   /* Centering a div 2 : grid */
-  /* display: grid;
-  place-items: center; */
+  display: grid;
+  place-items: center;
 
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -215,7 +215,6 @@ body {
   border-radius: 1rem;
   overflow: hidden;
   height: 40rem;
-  width: 60rem;
 }
 
 /* notes */
@@ -254,14 +253,13 @@ body {
   padding: 0.5rem 1rem;
 }
 
+/* Session 3 */
 .card__notes__add input {
   background-color: var(--secondary-colour);
   color: var(--text-colour--2);
-  border-radius: 8px;
+  border-radius: 0.5rem;
   border: none;
   outline: none;
-  padding: 0.5rem;
-  margin: -0.5rem;
   width: 100%;
 }
 
@@ -326,6 +324,7 @@ body {
   width: 3rem;
 }
 
+/* Session 3 */
 .card__todos__items__add--input {
   background-color: var(--secondary-colour);
   position: absolute;
