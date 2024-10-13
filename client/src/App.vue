@@ -7,7 +7,6 @@ import { RouterView } from 'vue-router';
 </template>
 
 <style>
-/* Resetting */
 :root {
   --primary-colour: hsl(166, 88%, 39%);
   --secondary-colour: hsl(166, 81%, 25%);
@@ -76,6 +75,10 @@ textarea,
 select {
   /* for some reason does not inherit on default */
   font: inherit;
+}
+
+input::placeholder {
+  color: hsl(from var(--text-colour--2) h s l / 0.32);
 }
 
 @media (prefers-reduced-motion: reduce) {
