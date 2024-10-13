@@ -69,6 +69,10 @@ select {
   font: inherit;
 }
 
+input::placeholder {
+  color: hsl(from var(--text-colour--2) h s l / 0.32);
+}
+
 @media (prefers-reduced-motion: reduce) {
   /* os settings reduce motions */
   /* Animation Effects for win 11 */
@@ -99,13 +103,13 @@ body {
   min-height: 100dvh;
 
   /* Centering a div 1 : flex */
-  display: flex;
+  /* display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
 
   /* Centering a div 2 : grid */
-  /* display: grid;
-  place-items: center; */
+  display: grid;
+  place-items: center;
 
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -119,7 +123,6 @@ body {
   border-radius: 1rem;
   overflow: hidden;
   height: 40rem;
-  width: 60rem;
 }
 
 /* notes */
