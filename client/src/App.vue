@@ -78,7 +78,7 @@ select {
 }
 
 input::placeholder {
-  color: hsl(from var(--text-colour--2) h s l / 0.32);
+  color: hsl(from var(--text-colour--2) h (s - 50%) (l - 50%));
 }
 
 @media (prefers-reduced-motion: reduce) {
