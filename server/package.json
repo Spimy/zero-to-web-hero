@@ -1,0 +1,25 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Backend serving the API for notes todo app.",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "pnpm exec nodemon src/index.ts",
+    "build": "rm -rf dist && pnpm exec tsc --build",
+    "start": "node dist/index.js"
+  },
+  "keywords": [],
+  "author": "Spimy",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "mongoose": "^8.7.3"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "nodemon": "^3.1.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  }
+}
