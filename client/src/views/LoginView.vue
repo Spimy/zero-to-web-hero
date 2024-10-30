@@ -98,7 +98,7 @@ main {
 
 .loginCard__field input {
   margin: 0;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   padding: 1rem;
   outline: none;
   border: none;
@@ -115,7 +115,7 @@ main {
   background-color: var(--primary-colour);
   outline: none;
   border: none;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   padding: 0.5rem;
   color: var(--text-colour--2);
   font-size: 1rem;
@@ -132,16 +132,6 @@ main {
 
 .loginCard__register a {
   text-decoration: none;
-  color: var(--primary-colour);
-}
-
-.loginCard__greet {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--background-colour--2);
-  font-size: 2rem;
   color: var(--primary-colour);
 }
 </style>

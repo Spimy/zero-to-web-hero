@@ -78,6 +78,10 @@ select {
   font: inherit;
 }
 
+input::placeholder {
+  color: hsl(from var(--text-colour--2) h (s - 50%) (l - 50%));
+}
+
 @media (prefers-reduced-motion: reduce) {
   /* os settings reduce motions */
   /* Animation Effects for win 11 */

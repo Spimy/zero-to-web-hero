@@ -1,12 +1,12 @@
 <script setup lang="ts">
 const props = defineProps<{
-  isCompleted: boolean;
+  complete: boolean;
 }>();
 </script>
 
 <template>
   <div class="todoItem">
-    <div class="todoItem__text" :class="{ 'todoItem__text--active': props.isCompleted }">
+    <div class="todoItem__text" :class="{ 'todoItem__text--active': props.complete }">
       <slot></slot>
     </div>
     <button class="todoItem__delete">
