@@ -1,16 +1,20 @@
+import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
 import notesRoute from './routes/notes.route';
+import usersRoute from './routes/users.route';
 
 dotenv.config();
 const app = express();
 
 // Setup global middlewares
+app.use(cors());
 app.use(express.json());
 
 // Register routes
 app.use('/notes', notesRoute);
+app.use('/users', usersRoute);
 
 const main = async () => {
   const port = Number(process.env.PORT);

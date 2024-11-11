@@ -10,20 +10,21 @@ import {
   toggleTodoById,
   updateNoteById
 } from '../controllers/notes.controller';
+import { authenticate } from '../middlewares/auth.middleware';
 
 const router = Router();
 
-router.get('/', getNotes);
-router.get('/:id', getNoteById);
-router.get('/:id/todos', getTodos);
+router.get('/', authenticate, getNotes);
+router.get('/:id', authenticate, getNoteById);
+router.get('/:id/todos', authenticate, getTodos);
 
-router.post('/', createNote);
-router.post('/:id/todos', addTodo);
+router.post('/', authenticate, createNote);
+router.post('/:id/todos', authenticate, addTodo);
 
-router.delete('/:id', deleteNoteById);
-router.delete('/:id/todos/:todoId', deleteTodoById);
+router.delete('/:id', authenticate, deleteNoteById);
+router.delete('/:id/todos/:todoId', authenticate, deleteTodoById);
 
-router.patch('/:id', updateNoteById);
-router.patch('/:id/todos/:todoId', toggleTodoById);
+router.patch('/:id', authenticate, updateNoteById);
+router.patch('/:id/todos/:todoId', authenticate, toggleTodoById);
 
 export default router;
