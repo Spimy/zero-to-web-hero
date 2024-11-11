@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "pnpm exec nodemon src/index.ts",
     "build": "rm -rf dist && pnpm exec tsc --build",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "mongo": "mongod --dbpath=./data"
   },
   "keywords": [],
   "author": "Spimy",
