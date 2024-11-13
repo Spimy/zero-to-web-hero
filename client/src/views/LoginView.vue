@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { useAuth } from '../composables/useAuth';
 
 const email = ref<string>('');
 const password = ref<string>('');
-
+const { login } = useAuth();
 const router = useRouter();
 
 const handleLogin = async () => {
@@ -13,7 +14,7 @@ const handleLogin = async () => {
     return;
   }
 
-  const success = true;
+  const success = await login(email.value, password.value);
   if (success) {
     router.push('/');
   } else {

@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { useAuth } from '../composables/useAuth';
 
 const email = ref<string>('');
 const password = ref<string>('');
 const confirmPassword = ref<string>('');
-
+const { register } = useAuth();
 const router = useRouter();
 
 const handleRegister = async () => {
@@ -19,7 +20,7 @@ const handleRegister = async () => {
     return;
   }
 
-  const success = true;
+  const success = await register(email.value, password.value);
 
   if (success) {
     alert('Registration successful!');
