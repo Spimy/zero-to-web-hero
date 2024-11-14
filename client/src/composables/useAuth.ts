@@ -1,11 +1,6 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import axios, {
-  type AxiosResponse,
-  AxiosError,
-  type InternalAxiosRequestConfig,
-  AxiosHeaders
-} from 'axios';
+import axios, { type AxiosResponse } from 'axios';
 
 interface User {
   _id: string;
@@ -29,11 +24,6 @@ const axiosInstance = axios.create({
     'Content-Type': 'application/json'
   }
 });
-
-// Extend AxiosRequestConfig to include `_retry` flag
-interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
-  _retry?: boolean;
-}
 
 export function useAuth() {
   const router = useRouter();
