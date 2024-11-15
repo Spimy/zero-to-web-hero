@@ -13,7 +13,6 @@ interface AuthTokens {
 }
 
 const user = ref<User | null>(null);
-const accessToken = ref<string | null>(localStorage.getItem('accessToken'));
 
 const API_URL = import.meta.env.VITE_API_URL + '/users';
 
@@ -44,7 +43,6 @@ export function useAuth() {
   const setTokens = (newAccessToken: string, newRefreshToken: string | null): void => {
     localStorage.setItem('accessToken', newAccessToken);
     if (newRefreshToken) localStorage.setItem('refreshToken', newRefreshToken);
-    accessToken.value = newAccessToken;
   };
 
   const register = async (email: string, password: string): Promise<boolean> => {
@@ -73,14 +71,14 @@ export function useAuth() {
   };
 
   const fetchAuthUser = async (): Promise<boolean> => {
-    if (!accessToken.value) {
+    if (!localStorage.getItem('accessToken')) {
       console.error('No access token found');
       return false;
     }
     try {
       const response: AxiosResponse<{ user: User }> = await axiosInstance.get(`${API_URL}/me`, {
         headers: {
-          Authorization: `Bearer ${accessToken.value}`
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`
         }
       });
       user.value = response.data.user;
@@ -94,7 +92,6 @@ export function useAuth() {
   const logout = (): void => {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
-    accessToken.value = null;
     user.value = null;
     router.push('/login');
   };
@@ -154,7 +151,6 @@ export function useAuth() {
   return {
     axiosInstance,
     user,
-    accessToken,
     login,
     register,
     fetchAuthUser,

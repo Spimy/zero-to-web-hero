@@ -20,13 +20,13 @@ const todos = ref<Todo[]>([]);
 const API_URL = import.meta.env.VITE_API_URL + '/notes';
 
 export function useNotes() {
-  const { accessToken, axiosInstance } = useAuth();
+  const { axiosInstance } = useAuth();
 
   const fetchNotes = async () => {
     try {
       const response = await axiosInstance.get(`${API_URL}`, {
         headers: {
-          Authorization: `Bearer ${accessToken.value}`
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`
         }
       });
       notes.value = response.data;
@@ -39,7 +39,7 @@ export function useNotes() {
     try {
       const response = await axiosInstance.get(`${API_URL}/${noteId}/todos`, {
         headers: {
-          Authorization: `Bearer ${accessToken.value}`
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`
         }
       });
       todos.value = response.data;
@@ -53,7 +53,7 @@ export function useNotes() {
       const response = await axiosInstance.post(
         `${API_URL}`,
         { title },
-        { headers: { Authorization: `Bearer ${accessToken.value}` } }
+        { headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` } }
       );
       notes.value.push(response.data);
     } catch (error) {
@@ -66,7 +66,7 @@ export function useNotes() {
       const response = await axiosInstance.post(
         `${API_URL}/${noteId}/todos`,
         { content },
-        { headers: { Authorization: `Bearer ${accessToken.value}` } }
+        { headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` } }
       );
       notes.value.push(response.data);
     } catch (error) {
@@ -78,7 +78,7 @@ export function useNotes() {
     try {
       await axiosInstance.delete(`${API_URL}/${noteId}`, {
         headers: {
-          Authorization: `Bearer ${accessToken.value}`
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`
         }
       });
     } catch (err) {
@@ -90,7 +90,7 @@ export function useNotes() {
     try {
       await axiosInstance.delete(`${API_URL}/${noteId}/todos/${todoId}`, {
         headers: {
-          Authorization: `Bearer ${accessToken.value}`
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`
         }
       });
     } catch (err) {
