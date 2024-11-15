@@ -20,7 +20,8 @@ const API_URL = import.meta.env.VITE_API_URL + '/users';
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
   headers: {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${localStorage.getItem('accessToken')}`
   }
 });
 
@@ -76,11 +77,7 @@ export function useAuth() {
       return false;
     }
     try {
-      const response: AxiosResponse<{ user: User }> = await axiosInstance.get(`${API_URL}/me`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`
-        }
-      });
+      const response: AxiosResponse<{ user: User }> = await axiosInstance.get(`${API_URL}/me`);
       user.value = response.data.user;
       return true;
     } catch (error) {
