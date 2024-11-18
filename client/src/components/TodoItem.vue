@@ -1,7 +1,20 @@
 <script setup lang="ts">
+import { useNotes } from '../composables/useNotes';
+
 const props = defineProps<{
   complete: boolean;
+  noteId: string;
+  todoId: string;
 }>();
+
+const emit = defineEmits(['todoDeleted']);
+
+const { deleteTodo } = useNotes();
+
+const handleDeleteTodo = async (noteId: string, todoId: string) => {
+  await deleteTodo(noteId, todoId);
+  emit('todoDeleted');
+};
 </script>
 
 <template>
@@ -9,7 +22,7 @@ const props = defineProps<{
     <div class="todoItem__text" :class="{ 'todoItem__text--active': props.complete }">
       <slot></slot>
     </div>
-    <button class="todoItem__delete">
+    <button class="todoItem__delete" @click="handleDeleteTodo(noteId, todoId)">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"

@@ -1,50 +1,78 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import TodoItem from '@/components/TodoItem.vue';
 import TodoNote from '@/components/TodoNote.vue';
+import { useAuth } from '../composables/useAuth';
+import { useNotes } from '@/composables/useNotes';
 
+const { notes, todos, fetchNotes, fetchTodos, createNote, createTodo } = useNotes();
+const { user, fetchAuthUser, logout } = useAuth();
 const router = useRouter();
 
-const notes = ref([
-  { title: '✏️ Room Renovaton', num: 5 },
-  { title: '✏️ Room Renovaton', num: 5 }
-]);
-
-const todos = ref([
-  { content: 'Buy Galvanized Square Steel', complete: true },
-  { content: 'Get Eco-friendly Wood Veneer', complete: false }
-]);
+onMounted(async () => {
+  const isAuthenticated = await fetchAuthUser();
+  if (!isAuthenticated) {
+    router.push('/login');
+  } else {
+    await fetchNotes();
+  }
+});
 
 const activeNote = ref<number | null>(null);
+const activeNoteTitle = ref<string | null>(null);
+const activeNoteId = ref<string | null>(null);
 const showNoteInput = ref(false);
 const newNoteTitle = ref('');
 const showTodoInput = ref(false);
 const newTodoTitle = ref('');
 
-const toggleActive = async (index: number) => {
+const toggleActive = async (index: number, noteId: string, noteTitle: string) => {
   activeNote.value = index;
+  activeNoteTitle.value = noteTitle;
+  activeNoteId.value = noteId;
+  await fetchTodos(noteId);
 };
 
 const toggleCompleted = (index: number) => {
   todos.value[index].complete = !todos.value[index].complete;
 };
 
+const refreshNotes = async () => {
+  await fetchNotes();
+  todos.value = [];
+  await fetchTodos(activeNoteId.value!);
+};
 const handleCreateNote = async (event: KeyboardEvent) => {
   if (event.key === 'Enter' && newNoteTitle.value.trim()) {
+    await createNote(newNoteTitle.value);
     newNoteTitle.value = '';
     showNoteInput.value = false;
+    await fetchNotes();
   }
 };
 
-const handleCreateTodo = async (event: KeyboardEvent) => {
-  if (event.key === 'Enter' && newTodoTitle.value.trim()) {
+const handleCreateTodo = async (
+  event: KeyboardEvent,
+  noteId: string | null = activeNoteId.value
+) => {
+  if (event.key === 'Enter' && newTodoTitle.value.trim() && noteId) {
+    await createTodo(noteId, newTodoTitle.value);
     newTodoTitle.value = '';
     showTodoInput.value = false;
+    await refreshNotes();
   }
+};
+
+const handleDeletedNote = async () => {
+  activeNote.value = null;
+  activeNoteTitle.value = null;
+  activeNoteId.value = null;
+  refreshNotes();
 };
 
 const handleLogout = async () => {
+  await logout();
   router.push('/login');
 };
 </script>
@@ -82,9 +110,11 @@ const handleLogout = async () => {
           <TodoNote
             v-for="(note, index) in notes"
             :key="index"
+            :noteId="note._id"
             :isActive="activeNote === index"
-            :todoNum="note.num"
-            @click="toggleActive(index)"
+            :todoNum="note.numTodos"
+            @click="toggleActive(index, note._id, note.title)"
+            @noteDeleted="handleDeletedNote"
           >
             {{ note.title }}
           </TodoNote>
@@ -118,7 +148,7 @@ const handleLogout = async () => {
         </div>
 
         <div class="card__notes__user">
-          <p title="Johnathan very long name">Johnathan very long name</p>
+          <p title="{{ user?.email }}">{{ user?.email }}</p>
           <button @click="handleLogout">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -143,16 +173,20 @@ const handleLogout = async () => {
       </aside>
 
       <main class="card__todos">
-        <h1>Room Renovation</h1>
+        <h1>{{ activeNoteTitle || 'No note selected' }}</h1>
         <menu class="card__todos__items">
           <TodoItem
             v-for="(todo, index) in todos"
             :key="index"
+            :noteId="todo._noteId"
+            :todoId="todo._id"
             @click="toggleCompleted(index)"
             :complete="todo.complete"
+            @todoDeleted="refreshNotes"
           >
             {{ todo.content }}
           </TodoItem>
+          <p v-if="!notes.length">No notes available. Add some!</p>
         </menu>
 
         <button class="card__todos__items__add" @click="showTodoInput = true" v-if="!showTodoInput">
