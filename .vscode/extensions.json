@@ -12,6 +12,7 @@
 		"Vue.volar",
 		"ms-vscode.vscode-typescript-next",
 		"BriteSnow.vscode-toggle-quotes",
-		"DSKWRK.vscode-generate-getter-setter"
+		"DSKWRK.vscode-generate-getter-setter",
+		"ms-azuretools.vscode-docker"
 	]
 }
