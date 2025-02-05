@@ -81,20 +81,4 @@ echo \
 Test it: `docker compose run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ --dry-run -d <subdomain>`
 Generate cert: `docker compose run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ -d <subdomain>`
 Renew certificate: `docker compose run --rm certbot renew`
-
-# In NGINX config
-```
-server {
-  listen 80;
-  server_name <subdomain>;
-  return 301 https://$host$request_uri;
-}
-```
-
-For ssl:
-```
-ssl_certificate /etc/letsencrypt/live/<subdomain>/fullchain.pem;
-ssl_certificate_key /etc/letsencrypt/live/<subdomain>/privkey.pem;
-```
-
 - Restart NGINX: `docker compose restart client`
