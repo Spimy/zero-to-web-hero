@@ -37,3 +37,18 @@ services:
       dockerfile: Dockerfile
     ports:
       - 80:80
+      - 443:443
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/sites-enabled/default.conf
+      - ./nginx/log/:/var/log/nginx:rw
+      - ./certbot/www/:/var/www/certbot/:ro # Certbot challenge folder
+      - ./certbot/conf/:/etc/letsencrypt/:ro # Certbot output folder
+    depends_on:
+      - server
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw # Certbot challenge folder
+      - ./certbot/conf/:/etc/letsencrypt/:rw # Certbot output folder
+    depends_on:
+      - client
