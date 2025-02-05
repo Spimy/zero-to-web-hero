@@ -34,7 +34,7 @@
 - List tmux sessions: `tmux list-sessions`
 - Cheatsheet for tmux: https://tmuxcheatsheet.com/
 
-- Clone repository branch: git clone -b session-8 https://github.com/Spimy/zero-to-web-hero.git
+- Clone repository branch: `git clone -b session-8 https://github.com/Spimy/zero-to-web-hero.git`
 - Client .env: `VITE_API_URL=http://<subdomain>/api`
 - Server .env: `JWT_SECRET=secret`
 - Generate JWT Secret: https://jwtsecret.com/generate
