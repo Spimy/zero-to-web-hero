@@ -71,8 +71,8 @@ echo \
 - Test DNS propagation: `nslookup <subdomain>`
 
 # Slow server, so build each image one at a time
-- Build server: `sudo docker compose build server --no-cache`
-- Build client: `sudo docker compose build client --no-cache`
+- Build server: `docker compose build server --no-cache`
+- Build client: `docker compose build client --no-cache`
 
 # NGINX configuration
 
