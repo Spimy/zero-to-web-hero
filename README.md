@@ -74,11 +74,72 @@ echo \
 - Build server: `sudo docker compose build server --no-cache`
 - Build client: `sudo docker compose build client --no-cache`
 
-- Run the project: `docker compose up`
-- Kill all running containers: `docker stop $(docker ps -a -q)`
+# NGINX configuration
+
+Before running, we will need to configure our NGINX configuration a bit. We need our default config to look similar to below:
+
+```conf
+# Default server block to handle requests to the IP address
+server {
+  listen 80 default_server;
+  server_name _;
+  return 403;
+}
+
+# Handle HTTP requests
+server {
+  listen 80;
+
+  # Replace localhost with subdomain
+  server_name localhost;
+
+  # Needed for LetsEncrypt, keep for cert renewals
+  location /.well-known/acme-challenge/ {
+    root /var/www/certbot;
+  }
+
+  # Test connectivity with 404
+  location / {
+    return 404;
+  }
+
+  # After setting up certbot, to redirect HTTP to HTTPS
+  # return 301 https://$host$request_uri;
+}
+
+# Main server block
+# server {
+#   listen 443 ssl;
+
+#   # Replace localhost with subdomain
+#   server_name localhost;
+
+#   root /usr/share/nginx/html;
+#   index index.html index.htm;
+
+#   # Reverse proxy to access the API using http://<subdomain>/api
+#   location /api/ {
+#     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+#     proxy_set_header Host $host;
+#     proxy_pass http://server:3000/;
+#     proxy_http_version 1.1;
+#     proxy_set_header Upgrade $http_upgrade;
+#     proxy_set_header Connection "upgrade";
+#     proxy_set_header X-Forwarded-Proto https;
+#   }
+
+#   ssl_certificate /etc/letsencrypt/live/<subdomain>/fullchain.pem;
+#   ssl_certificate_key /etc/letsencrypt/live/<subdomain>/privkey.pem;
+# }
+```
 
 # After setting up certbot in docker compose
-Test it: `docker compose run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ --dry-run -d <subdomain>`
-Generate cert: `docker compose run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ -d <subdomain>`
-Renew certificate: `docker compose run --rm certbot renew`
+
+- Test it: `docker compose run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ --dry-run -d <subdomain>`
+- Generate cert: `docker compose run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ -d <subdomain>`
+- Renew certificate when it expires: `docker compose run --rm certbot renew`
 - Restart NGINX: `docker compose restart client`
+
+# After initial setup
+- Run the project again after shutting down: `docker compose up`
+- Kill all running containers: `docker stop $(docker ps -a -q)`
