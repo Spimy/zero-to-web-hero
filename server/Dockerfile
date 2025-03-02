@@ -1,13 +1,15 @@
 FROM node:20.15-alpine AS builder
 
 # Enable pnpm
+RUN npm install -g corepack@latest
 RUN corepack enable
+RUN corepack prepare pnpm@9.15.5 --activate
 
-# Go inside builder directory
+# Go inside app directory
 WORKDIR /builder
 
 # Copy all files that are not in .dockerignore into the WORKDIR
-COPY . .
+COPY . ./
 
 # Install all dependencies
 RUN pnpm install
